@@ -1,11 +1,5 @@
 #include "bridge.h"
 
-Bridge::Bridge(QObject *parent) : QObject(parent)
-{
-
-}
-#include "bridge.h"
-
 Bridge::Bridge(QObject *parent)
     : QObject(parent)
     , m_column(3)
