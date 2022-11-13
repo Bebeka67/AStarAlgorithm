@@ -1,40 +1,45 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include <QPoint>
-#include <QString>
+#include <iostream>
+#include <QMap>
+
 
 class Node
 {
 public:
     Node();
+    Node(int ind);
 
-    void setName(QString name);
-    void setCoord(QPoint coords);
-    void setPrevios(Node* prev);
+    bool operator==(const Node other);
 
-    QPoint coords() { return QPoint(_x, _y); }
-    Node* previous() { return _previous; }
+    bool operator<(const Node &other) const;
 
-    bool operator ==(const Node& other)
+    bool operator<=(const Node other);
+
+    bool operator!=(const Node other);
+
+    void operator=(const Node &other);
+
+    friend std::ostream &operator<<(std::ostream &out, Node &node)
     {
-        if( this->_x != other._x )
-            return false;
-        if( this->_y != other._y )
-            return false;
-
-        if( this->_name != other._name )
-            return false;
-        return true;
+        out << (QString("Index: %1, Coords: (%2,%3), fScore: %4")
+                .arg(node.index).arg(node.coords.first)
+                .arg(node.coords.second)
+                .arg(node.fScore))
+               .toStdString() << std::endl;
+        return out;
     }
 
-private:
+    int h(Node other);
 
+    QList<Node> neighbors;
 
-    QString _name;
+    QPair<int,int> coords;
 
-    int _x;
-    int _y;
+    int index;
+    int costToPrevious = 0;
+    int fScore = 0;
 };
 
 #endif // NODE_H

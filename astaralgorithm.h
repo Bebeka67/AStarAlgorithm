@@ -1,17 +1,43 @@
 #ifndef ASTARALGORITHM_H
 #define ASTARALGORITHM_H
 
-#include <QObject>
+#include "graph.h"
+#include "node.h"
 
-class AStarAlgorithm : public QObject
+#include <QMap>
+#include <QDebug>
+
+using namespace std;
+class AStarAlgorithm
 {
-    Q_OBJECT
+
 public:
-    explicit AStarAlgorithm(QObject *parent = nullptr);
+    AStarAlgorithm();
 
-signals:
+    MatrixXi run(MatrixXi);
 
-public slots:
+
+
+
+private:    // Metods
+
+    QMap<int, Node> createNodeMapFromGraphMatrix( MatrixXi );
+    Node createNodeFromGraph(int, int, MatrixXi);
+
+    QList<int> A_Star(Node,Node, QMap<int, Node>);
+    QList<int> reconstructPath(QMap<int, Node>, Node);
+    QList<Node> findNeighborsFor(Node, Graph,QMap<int, Node>);
+
+    MatrixXi mapThePath(QList<int>, Graph);
+
+private:    // Data
+
+
+
+    Graph* m_graph;
+
+    QMap<int, Node> NodeMap;  // ключ - развернутый индекс, значение - вершина.
+
 };
 
 #endif // ASTARALGORITHM_H
