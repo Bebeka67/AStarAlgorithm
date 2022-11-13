@@ -1,22 +1,35 @@
 #include "node.h"
 
-Node::Node() : _x(0), _y(0)
+Node::Node()
 {
 
 }
 
-void Node::setCoords(QPoint coords)
+Node::Node(int ind) : index(ind)
 {
-    _x = coords.x();
-    _y = coords.y();
+
 }
 
-void Node::setName(QString name)
+bool Node::operator==(const Node other)
+{ return this->index == other.index ? true : false; }
+
+bool Node::operator<(const Node &other) const
+{ return this->fScore < other.fScore ? true : false; }
+
+bool Node::operator<=(const Node other)
+{ return this->fScore <= other.fScore ? true : false; }
+
+//bool Node::operator!=(const Node other)
+//{ return this->index != other.index ? true : false; }
+
+void Node::operator=(const Node &other)
 {
-    this->_name = name;
+    this->coords = other.coords;
+    this->index = other.index;
+    this->fScore = other.fScore;
 }
 
-void Node::setPrevios(Node* prev)
+int Node::h(Node other)
 {
-    this->_previous = prev;
+    return 10 * (abs( this->coords.first - other.coords.first) + abs( this->coords.second - other.coords.second ));
 }
