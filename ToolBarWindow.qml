@@ -30,14 +30,6 @@ ApplicationWindow {
             
             padding: 5
             RowLayout {
-                id: iddd
-                ToolButton {
-                    text: "View"
-                    
-                    onClicked: {
-                        console.log(expandedMatrix)
-                    }
-                }
                 ToolButton {
                     text: "Calculate"
                     

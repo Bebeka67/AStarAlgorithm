@@ -11,11 +11,6 @@ AStarAlgorithm::AStarAlgorithm()
 
 MatrixXi AStarAlgorithm::run(MatrixXi sourceMatrix)
 {
-
-    /* с графом должно произойти следующее
-     * 1. задаются размеры матрицы
-     * 2. инициализироваться состояния клеток (пустая, проходимая, начальная целевая)
-    */
     m_graph = new Graph(sourceMatrix);
 
     QMap<int, Node> NodeMap = createNodeMapFromGraphMatrix(m_graph->graphMatrix());
@@ -52,7 +47,7 @@ MatrixXi AStarAlgorithm::mapThePath(QList<int> path, Graph graph)
             int index = i * result.cols() + j;
             if( path.contains(index))
             {
-                result(i,j) += 5;
+                result(i,j) = 5;
             }
         }
     return result;
